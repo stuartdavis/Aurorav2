@@ -38,7 +38,8 @@ public class RecentMoodsAdapter extends BaseAdapter {
     @SuppressWarnings("unchecked")
 	ArrayList<AsyncTask> tasks;
 
-    public RecentMoodsAdapter(Context c) {
+    @SuppressWarnings("unchecked")
+	public RecentMoodsAdapter(Context c) {
         mContext = c;
         recentStats = new ArrayList<Status>();
       //TODO
