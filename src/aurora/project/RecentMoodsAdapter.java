@@ -210,7 +210,6 @@ public class RecentMoodsAdapter extends BaseAdapter {
             Bitmap bitmap = null;
             while(bitmap == null) {
             	//http get
-            	//http get
             	try{
             		HttpClient httpclient = new DefaultHttpClient();
             		HttpGet httpget = new HttpGet(url);
