@@ -105,10 +105,7 @@ public class PostActivity extends Activity{
     	//TODO
 	    gridview.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	        	
-	        	
 	        	selectedpic.setImageDrawable( ( (ImageView) v).getDrawable() );
-	        	Log.e("POST", selectedpic.getDrawable().toString());
 	        	selectedPosition = position;
 	        }
 	    });
@@ -140,6 +137,8 @@ public class PostActivity extends Activity{
         	}
         });
     	
+    	
+    	//TODO
     	confirm.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		dialog = ProgressDialog.show(PostActivity.this, "", "Posting. Please wait...", true);
@@ -225,6 +224,7 @@ public class PostActivity extends Activity{
 		moodAdapter.populate();
 	}
 	
+	//TODO
 	public void onPause() {
 		super.onPause();
 		Aurora.killTasks();
