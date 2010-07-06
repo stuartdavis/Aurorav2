@@ -243,6 +243,7 @@ public class FriendsActivity extends Activity{
 		super.onPause();
 		Aurora.killTasks();
 	}
+	
 	//TODO
 	private class PopulateFriendsList extends AsyncTask<Void, Void, JSONArray> {
 		@Override
@@ -285,11 +286,10 @@ public class FriendsActivity extends Activity{
 			}
 			
 			try {
-			jArray = new JSONArray(result);
-	       
+				jArray = new JSONArray(result);
 			} catch(Exception e){
-    		        Log.e("FRIENDS ACTIVITY", "Error parsing data "+e.toString());
-    		}
+				Log.e("FRIENDS ACTIVITY", "Error parsing data "+e.toString());
+			}
 			
 			return jArray;
 		}

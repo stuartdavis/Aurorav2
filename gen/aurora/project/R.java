@@ -25,17 +25,9 @@ public final class R {
         public static final int icon=0x7f02000b;
         public static final int post_icon_dark=0x7f02000c;
         public static final int post_icon_light=0x7f02000d;
-        public static final int sample_0=0x7f02000e;
-        public static final int sample_1=0x7f02000f;
-        public static final int sample_2=0x7f020010;
-        public static final int sample_3=0x7f020011;
-        public static final int sample_4=0x7f020012;
-        public static final int sample_5=0x7f020013;
-        public static final int sample_6=0x7f020014;
-        public static final int sample_7=0x7f020015;
-        public static final int talk_tab_dark=0x7f020016;
-        public static final int talk_tab_light=0x7f020017;
-        public static final int undo=0x7f020018;
+        public static final int talk_tab_dark=0x7f02000e;
+        public static final int talk_tab_light=0x7f02000f;
+        public static final int undo=0x7f020010;
     }
     public static final class id {
         public static final int answer=0x7f050030;
