@@ -74,7 +74,6 @@ public class MoodAdapter extends BaseAdapter {
         return imageView;
     }
 
-    
     //TODO
     public void populate() {
     	killTasks();

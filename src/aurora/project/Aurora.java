@@ -120,7 +120,7 @@ public class Aurora extends TabActivity {
         		new GetUserIdTask().execute();	
         	}    		
         });
-        try {
+        
         intent = new Intent().setClass(this,PostActivity.class);
         spec = tabHost.newTabSpec("Post").setIndicator("Post",
                 res.getDrawable(R.drawable.ic_tab_post))
@@ -168,12 +168,7 @@ public class Aurora extends TabActivity {
         		}
         	}
         });
-        } catch(Exception e) {
-        	Log.e("tag", "INTENT ERROR: " + e.toString());
-        }
     }
-	
-	
 	
 	//TODO
 	public static boolean isOnline() {
@@ -263,14 +258,14 @@ public class Aurora extends TabActivity {
 				return Integer.parseInt(result);
 			}
 		}
+		
 		//TODO
 		@Override
     	protected void onPostExecute(Integer userId){
     		if (userId >=0){	
     			Aurora.USER_ID = userId;
     			Aurora.USERNAME = username.getText().toString();
-    			try{
-    				
+    			try{				
     				tabHost.setVisibility(0);
     				signinscreen.setVisibility(8);  				
     			} catch(Exception e) {
