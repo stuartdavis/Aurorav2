@@ -162,6 +162,8 @@ public class GamesActivity extends Activity{
 		playing.setVisibility(4);
 		gameselect.setVisibility(0);
 		
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+			Toast.makeText(GamesActivity.this, "The games only function properly while the phone is vertical.", Toast.LENGTH_LONG).show();
 		clearGameScores();
 		new PopulateGameScores().execute();
 	}

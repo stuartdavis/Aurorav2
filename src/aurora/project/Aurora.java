@@ -84,7 +84,9 @@ public class Aurora extends TabActivity {
         remember = (CheckBox) findViewById(R.id.remember);
         prefs = getPreferences(MODE_PRIVATE);
         
-        auroraLogo.setImageResource(R.drawable.final_aurora_logo_290w);        
+        auroraLogo.setImageResource(R.drawable.final_aurora_logo_290w);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 
+        	auroraLogo.setVisibility(4);
         tabHost.setVisibility(4);
         
         try{
