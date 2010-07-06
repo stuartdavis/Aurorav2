@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<RelativeLayout 
+	android:id="@+id/typescreen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:id="@+id/type_here_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Type your post here:"/>
+    <EditText
+        android:id="@+id/entry"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background"
+        android:minLines="4"
+        android:layout_below="@id/type_here_label"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entry"
+        android:layout_marginTop="8dip"
+        android:layout_alignParentRight="true"
+        android:text="Next" />
+    <Button
+    	android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/next"
+        android:layout_alignTop="@id/next"
+        android:text="Cancel" />
+</RelativeLayout>
+
+<RelativeLayout 
+	android:id="@+id/picselectscreen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">        
+    <Button
+    	android:id="@+id/morebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="More" />
+    <Button
+        android:id="@+id/firstpost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/morebutton"
+        android:layout_alignTop="@id/morebutton"
+        android:text="Post" />
+    <ImageView
+    	android:id="@+id/selectedpic"
+    	android:layout_width="60dp"
+    	android:layout_height="60dp"
+    	android:scaleType="centerCrop"
+    	android:layout_alignParentRight="true"/>
+    <TextView
+        android:id="@+id/selectedtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/selectedpic"
+        android:layout_alignBottom="@id/firstpost"
+        android:layout_marginRight="9dp"
+        android:layout_marginBottom="16dp"
+        android:text="Selected:" />
+    <GridView
+    	android:id="@+id/gridview02"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:columnWidth="90dp"
+    	android:numColumns="4"
+    	android:verticalSpacing="4dp"
+    	android:horizontalSpacing="4dp"
+    	android:layout_below="@id/selectedpic"
+    	android:stretchMode="columnWidth"
+    	android:gravity="center"/>
+</RelativeLayout>
+    	
+<RelativeLayout 
+	android:id="@+id/confirmscreen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">    	
+	<TextView
+        android:id="@+id/confirmtext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+        android:text="Post:"/>
+	<TextView
+        android:id="@+id/confirmedtext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/confirmtext"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/confirmpic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirmedtext"
+        android:layout_marginTop="5dp"
+        android:text="Picture:"/>
+	<ImageView
+        android:id="@+id/confirmedpic"
+        android:layout_below="@id/confirmpic"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"/> 
+	<Button
+        android:id="@+id/finalcancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirmedpic"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:text="Cancel"/>
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/finalcancel"
+        android:layout_alignTop="@id/finalcancel"
+        android:text="Confirm" />
+</RelativeLayout>
+    
+</RelativeLayout>

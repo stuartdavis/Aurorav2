@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+
+<RelativeLayout
+	android:id="@+id/postsviewscreen"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<Button
+        android:id="@+id/viewfriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" 
+        android:text="View By Friends"/>
+	<GridView 
+    	android:id="@+id/gridview"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="fill_parent"
+    	android:columnWidth="90dp"
+    	android:numColumns="4"
+    	android:verticalSpacing="4dp"
+    	android:horizontalSpacing="4dp"
+    	android:stretchMode="columnWidth"
+    	android:layout_above="@id/viewfriends"
+    	android:gravity="center"/>
+</RelativeLayout>
+
+<RelativeLayout
+	android:id="@+id/friendslistscreen"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<Button
+        android:id="@+id/viewrecentposts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" 
+        android:text="View All Recent Posts"/>
+	<ListView
+		android:id="@+id/friendslist"
+		android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:layout_above="@id/viewrecentposts">
+	</ListView>
+</RelativeLayout>
+
+<RelativeLayout
+	android:id="@+id/friendspostsscreen"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<GridView 
+    	android:id="@+id/friendsgridview"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="fill_parent"
+    	android:columnWidth="90dp"
+    	android:numColumns="4"
+    	android:verticalSpacing="4dp"
+    	android:horizontalSpacing="4dp"
+    	android:stretchMode="columnWidth"
+    	android:gravity="center"/>
+	<Button
+        android:id="@+id/backtoallfriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" 
+        android:text="Back to All Friends"/>
+</RelativeLayout>
+
+<RelativeLayout
+	android:id="@+id/postscreen"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">    
+    <ImageView
+  		android:id="@+id/postimage"
+  		android:layout_width="wrap_content"
+  		android:layout_height="wrap_content"
+  		android:adjustViewBounds="true"
+  		android:maxHeight="90dp"
+  		android:maxWidth="90dp"
+  		android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/posted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postimage"
+        android:layout_marginTop="3dp"
+        android:text="Posted: "/>
+    <TextView
+        android:id="@+id/post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/posted"
+        android:layout_toRightOf="@id/posted"/>     
+	<TextView
+        android:id="@+id/postedby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/post"
+        android:layout_alignLeft="@id/posted"
+        android:layout_marginTop="3dp"
+        android:text="Posted By: "/>
+	<TextView
+        android:id="@+id/poster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/postedby"
+        android:layout_toRightOf="@id/postedby"/>
+	<TextView
+        android:id="@+id/at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postedby"
+        android:layout_marginTop="3dp"
+        android:text="At: "/>
+	<TextView
+        android:id="@+id/time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/at"
+        android:layout_toRightOf="@id/at"/>
+	<Button
+        android:id="@+id/backbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" 
+        android:text="Back"/>
+    <Button
+        android:id="@+id/commentbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" 
+        android:text="Comment"/>
+</RelativeLayout>
+
+
+<RelativeLayout
+	android:id="@+id/commentscreen"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"> 
+	<TextView
+        android:id="@+id/type_here_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Type your comment here:"/>
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background"
+        android:minLines="4"
+        android:layout_below="@id/type_here_label"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/sendcomment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comment"
+        android:layout_marginTop="8dip"
+        android:layout_alignParentRight="true"
+        android:text="Send Comment" />
+    <Button
+    	android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/sendcomment"
+        android:layout_alignTop="@id/sendcomment"
+        android:text="Cancel" />
+</RelativeLayout>
+        
+</RelativeLayout>

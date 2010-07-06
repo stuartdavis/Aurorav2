@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Aurora!</string>
+    <string name="app_name">Aurora</string>
+    <string name="option1text">Hope this works</string>
+</resources>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  	xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="wrap_content"
+  	android:layout_height="wrap_content">
+	<TextView
+		android:id="@+id/talkdescription"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+	<Button
+		android:id="@+id/conversationsbutton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:text="Conversations"/>
+	<Button
+		android:id="@+id/auroraimbutton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:text="Aurora IM"/>
+	<ListView
+		android:id="@+id/conversationslist"
+		android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:layout_above="@id/conversationsbutton"/>
+    
+    <Button
+		android:id="@+id/backbutton"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:text="Back"/>
+	<Button
+		android:id="@+id/replybutton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:text="Reply"/>
+	<ImageView
+		android:id="@+id/conversationpic"
+		android:layout_width="60dp"
+		android:layout_height="60dp"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"/>
+	<TextView
+		android:id="@+id/conversationstarter"
+		android:layout_toRightOf="@id/conversationpic"
+		android:layout_marginLeft="8dp"
+		android:layout_width="fill_parent"
+		android:layout_height="60dp"/>
+	<ListView
+		android:id="@+id/conversation"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_above="@id/replybutton"
+		android:layout_below="@id/conversationstarter"
+		android:orientation="vertical"/>
+		
+	<RelativeLayout
+		android:id="@+id/replyscreen"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"> 
+	<TextView
+        android:id="@+id/type_here_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Type your comment here:"/>
+    <EditText
+        android:id="@+id/commenteditor"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minLines="4"
+        android:layout_below="@id/type_here_label"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/sendcomment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commenteditor"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentRight="true"
+        android:text="Send Comment" />
+    <Button
+    	android:id="@+id/cancelcomment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/sendcomment"
+        android:layout_alignTop="@id/sendcomment"
+        android:text="Cancel" />    
+	</RelativeLayout>
+	
+	<ListView
+		android:id="@+id/auroraimlist"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:layout_above="@id/auroraimbutton"/>
+	<Button
+		android:id="@+id/postbutton"
+		android:layout_width="80dp"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:text="Post"/>
+	
+</RelativeLayout>
