@@ -34,7 +34,7 @@ public class RecentMoodsAdapter extends BaseAdapter {
     private Context mContext;
     private final int numStats = 16;  
     private ArrayList<Status> recentStats;
-   //TODO
+
     @SuppressWarnings("unchecked")
 	ArrayList<AsyncTask> tasks;
 
@@ -42,7 +42,6 @@ public class RecentMoodsAdapter extends BaseAdapter {
 	public RecentMoodsAdapter(Context c) {
         mContext = c;
         recentStats = new ArrayList<Status>();
-      //TODO
         tasks = new ArrayList<AsyncTask>();
     }
 
@@ -77,8 +76,6 @@ public class RecentMoodsAdapter extends BaseAdapter {
         return imageView;
     }
 
-    
-    //TODO
     public void populate(int id) {
     	killTasks();
     	recentStats.clear();
@@ -86,7 +83,6 @@ public class RecentMoodsAdapter extends BaseAdapter {
     	tasks.add(new PopulateRecentMoods().execute(id));
     }
     
-    //TODO
     @SuppressWarnings("unchecked")
 	public void killTasks() {
     	for(AsyncTask task : tasks) {
@@ -138,19 +134,20 @@ public class RecentMoodsAdapter extends BaseAdapter {
 			try{
 			        HttpClient httpclient = new DefaultHttpClient();
 			        HttpResponse response;
+			        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			        if (friend_id > 0) {
-			        	ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 						nameValuePairs.add(new BasicNameValuePair("friend_id", String.valueOf(friend_id)));
 						HttpPost httppost = new HttpPost("http://auroralabs.cornellhci.org/android/getRecentMoodsForUser.php");
 					    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 					    response = httpclient.execute(httppost);
 			        } else {
-			        	HttpGet httpget = new HttpGet("http://auroralabs.cornellhci.org/android/getRecentMoods.php");
-			        	response = httpclient.execute(httpget);
+			        	nameValuePairs.add(new BasicNameValuePair("user_id", String.valueOf(Aurora.USER_ID)));
+			        	HttpPost httppost = new HttpPost("http://auroralabs.cornellhci.org/android/getRecentMoods.php");
+			        	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			        	response = httpclient.execute(httppost);
 			        }
 			        
-			        HttpEntity entity = response.getEntity();
-			        is = entity.getContent();
+			        is = response.getEntity().getContent();
 			}catch(Exception e){
 			        Log.e("POPULATE RECENT MOODS", "Error in http connection "+e.toString());
 			}
@@ -187,15 +184,15 @@ public class RecentMoodsAdapter extends BaseAdapter {
 		}
 		
 		@Override
-    	protected void onPostExecute(String[] imagePaths){		
-    		
-    		try{
+    	protected void onPostExecute(String[] imagePaths){
+			//no posts
+    		if(imagePaths[0] == null) {
+    			FriendsActivity.noRecentPosts();
+    		} else {
     			for(int i=0; i<imagePaths.length && imagePaths[i] != null; i++) {
                 tasks.add(new DownloadMoodImages().execute("http://auroralabs.cornellhci.org/img/" + imagePaths[i], i));
     			}
-            } catch(Exception e) {
-                Log.e("POPULATE RECENT MOODS", "Error in downloading image "+e.toString());            
-            }
+    		}
     		
     	}
     }

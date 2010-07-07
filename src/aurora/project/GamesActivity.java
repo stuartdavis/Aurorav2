@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -58,6 +59,7 @@ public class GamesActivity extends Activity{
 	private Button back;
 	private Button answer;
 	private Boolean playingassociate;
+	private ProgressDialog dialog;
 	
 	public void onCreate(Bundle savedInstanceState){
 		Log.e("log_tag", "STARTING GAMESACTIVITY ONCREATE");
@@ -89,6 +91,7 @@ public class GamesActivity extends Activity{
 		back = (Button) findViewById(R.id.back);
 		answer = (Button) findViewById(R.id.answer);
 		
+		gameselect.setVisibility(4);
 		playing.setVisibility(4);
 		
     	associateplay.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +100,6 @@ public class GamesActivity extends Activity{
             	clearGameAnswers();
             	gameselect.setVisibility(4);
             	playing.setVisibility(0);
-            	//TODO pic and correcttext
             	
             	correct = (int) Math.floor(Math.random()*4);
             	new PopulateGameAnswers().execute();      	
@@ -112,7 +114,6 @@ public class GamesActivity extends Activity{
             	playing.setVisibility(0);
             	associatepic.setVisibility(0);
             	whodunnittext.setVisibility(0);
-            	//TODO set whodunnit and correct text
             	
             	correct = (int) Math.floor(Math.random()*4);
             	new PopulateGameAnswers().execute();
@@ -120,7 +121,6 @@ public class GamesActivity extends Activity{
         });
     	
     	answer.setOnClickListener(new View.OnClickListener() {
-    		//TODO update database with wins/played
 			public void onClick(View v) {
 				int isCorrect = 0;
 				//increment plays
@@ -159,11 +159,8 @@ public class GamesActivity extends Activity{
 	}
 	
 	public void myOnResume(){
+		gameselect.setVisibility(4);
 		playing.setVisibility(4);
-		gameselect.setVisibility(0);
-		
-		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-			Toast.makeText(GamesActivity.this, "The games only function properly while the phone is vertical.", Toast.LENGTH_LONG).show();
 		clearGameScores();
 		new PopulateGameScores().execute();
 	}
@@ -182,7 +179,24 @@ public class GamesActivity extends Activity{
 		whodunnitwon.setText("");
 		whodunnitplayed.setText("");
 	}
+	
+	public void lockGames() {
+		//TODO show textview that says games are locked until other users have made more posts
+		//be sure to hide the textview in myOnResume()
+		Toast.makeText(GamesActivity.this, "not enough posts", Toast.LENGTH_SHORT).show();
+	}
+	
+	/**
+	 * If there are enough posts to unlock games, the tab is displayed with the user's scores.
+	 * Otherwise hides the tab and prompts the user to wait until other people have made more posts.
+	 */
 	private class PopulateGameScores extends AsyncTask<Void, Void, JSONArray> {
+		@Override
+		protected void onPreExecute() {
+			dialog = ProgressDialog.show(GamesActivity.this, "", "Loading. Please wait...", true);
+			super.onPreExecute();
+		}
+		
 		@Override
 		protected JSONArray doInBackground(Void... params) {
 			String result = "";
@@ -216,7 +230,8 @@ public class GamesActivity extends Activity{
 			        }
 			        is.close();
 			        
-			        jArray = new JSONArray(result);
+			        if(!result.equals("locked"));
+			          jArray = new JSONArray(result);
 			}catch(Exception e){
 			        Log.e("POPULATE GAME SCORES", "Error converting result "+e.toString());
 			}
@@ -225,24 +240,34 @@ public class GamesActivity extends Activity{
 		}
 		
 		@Override
-    	protected void onPostExecute(JSONArray jArray){		
-    		try{
-    			JSONObject json_data = jArray.getJSONObject(0);
-				associatewon.setText(json_data.getString("num_correct"));
-				associateplayed.setText(json_data.getString("times_played"));
+    	protected void onPostExecute(JSONArray jArray){
+			dialog.dismiss();
+			if(jArray == null) {
+				lockGames();
+			} else {
+				gameselect.setVisibility(0);
 				
-				json_data = jArray.getJSONObject(1);
-				whodunnitwon.setText(json_data.getString("num_correct"));
-				whodunnitplayed.setText(json_data.getString("times_played"));
-				
-            } catch(Exception e) {
-                Log.e("POPULATE GAME SCORES", "Error setting scores "+e.toString());
-                
-            }
+				try{
+					JSONObject json_data = jArray.getJSONObject(0);
+					associatewon.setText(json_data.getString("num_correct"));
+					associateplayed.setText(json_data.getString("times_played"));
+
+					json_data = jArray.getJSONObject(1);
+					whodunnitwon.setText(json_data.getString("num_correct"));
+					whodunnitplayed.setText(json_data.getString("times_played"));
+
+				} catch(Exception e) {
+					Log.e("POPULATE GAME SCORES", "Error setting scores "+e.toString());
+
+				}
+				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+					Toast.makeText(GamesActivity.this, "The games only function properly while the phone is vertical.", Toast.LENGTH_LONG).show();
+			}
     	}
     }
 	
 	private class PopulateGameAnswers extends AsyncTask<Void, Void, JSONArray> {
+		
 		@Override
 		protected JSONArray doInBackground(Void... params) {
 			String result = "";
@@ -401,7 +426,6 @@ public class GamesActivity extends Activity{
 				Log.e("UPDATE SCORE", "Error converting result "+e.toString());
 			}
 			
-			//TODO
 			if(!result.equals("OKOK")) {
 				
 				Toast.makeText(GamesActivity.this, "Error updating score", Toast.LENGTH_SHORT);

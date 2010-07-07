@@ -42,7 +42,6 @@ public class Aurora extends TabActivity {
 	
 	public static final String KEY_USER = "username";
 	public static int USER_ID;
-	public static int GROUP_ID;
 	public static String USERNAME;
 	private TabHost tabHost;
 	private RelativeLayout signinscreen; 
@@ -53,20 +52,22 @@ public class Aurora extends TabActivity {
 	private CheckBox remember;
 	private SharedPreferences prefs;
 	
-	//TODO
 	private static NetworkConnectivityListener connectivityListener;
 	private final int CONNECTIVITY_MSG = 0;
 	private ProgressDialog dialog;
+	
 	private static ArrayList<AsyncTask> tasks;
 	public static void addTask(AsyncTask task) {
 		tasks.add(task);
 	}
+	
 	public static void killTasks() {
 		for(AsyncTask task : tasks) {
     		task.cancel(true);
     	}
     	tasks.clear();
 	}
+	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -97,8 +98,7 @@ public class Aurora extends TabActivity {
         } catch(Exception e) {
         	Log.e("AURORA", "ERROR RETRIEVING SAVED PREFERENCES");
         }
-        
-        //TODO
+
       //manage network connection
     	Handler mHandler = new Handler() {
     		public void handleMessage(Message msg) {
@@ -118,7 +118,6 @@ public class Aurora extends TabActivity {
         signin.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		//				check username and password from EditText's username and password
-        		dialog = ProgressDialog.show(Aurora.this, "", "Loading. Please wait...", true);
         		new GetUserIdTask().execute();	
         	}    		
         });
@@ -172,7 +171,6 @@ public class Aurora extends TabActivity {
         });
     }
 	
-	//TODO
 	public static boolean isOnline() {
 		NetworkInfo networkInfo = connectivityListener.getNetworkInfo();
 		return networkInfo.isConnected();
@@ -201,6 +199,12 @@ public class Aurora extends TabActivity {
 	}
 	
 	private class GetUserIdTask extends AsyncTask<Void, Void, Integer> {
+		@Override
+		protected void onPreExecute() {
+			dialog = ProgressDialog.show(Aurora.this, "", "Loading. Please wait...", true);
+			super.onPreExecute();
+		}
+		
 		@Override
 		protected Integer doInBackground(Void... params) {
 			String result = "";
@@ -238,7 +242,6 @@ public class Aurora extends TabActivity {
 			        Log.e("AURORA", "Error converting result "+e.toString());
 			}
 			
-			//TODO
 			if(result.equals("") || result.equals("-1"))
 				return -1;
 			else {
@@ -261,7 +264,6 @@ public class Aurora extends TabActivity {
 			}
 		}
 		
-		//TODO
 		@Override
     	protected void onPostExecute(Integer userId){
     		if (userId >=0){	

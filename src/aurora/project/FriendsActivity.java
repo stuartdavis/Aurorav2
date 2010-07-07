@@ -61,13 +61,14 @@ public class FriendsActivity extends Activity{
 	
 	private Boolean inlistview;
 	
-	//TODO
 	private ArrayAdapter<String> listadapter;
 	private ArrayList<Integer> friendIds;
 	private int selectedPosition;
 	private ProgressDialog dialog;
+    private static Activity context;
 	
 	public void onCreate(Bundle savedInstanceState) {
+		context = this;
 		Log.e("log_tag", "STARTING FRIENDSACTIVITY ONCREATE");
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.friends_activity_layout);
@@ -101,8 +102,6 @@ public class FriendsActivity extends Activity{
 	    friendsadapter = new RecentMoodsAdapter(this);
 	    friendsgridview.setAdapter(friendsadapter);
 	    
-	    //TODO
-	    //friendNames = new ArrayList<String>();
 	    friendIds = new ArrayList<Integer>();
 	    listadapter = new ArrayAdapter<String>(this, R.layout.list_item, new ArrayList<String>());
 	    
@@ -119,7 +118,7 @@ public class FriendsActivity extends Activity{
 	        	ImageView clicked = (ImageView) v;
 	        	if (clicked.getDrawable()!=null)
 	        	postimage.setImageDrawable(clicked.getDrawable());
-	        	//TODO
+
 	        	post.setText(recentMoodsAdapter.getStatusNote(position));
 	        	poster.setText(recentMoodsAdapter.getStatusUsername(position));
 	        	time.setText(recentMoodsAdapter.getStatusTime(position));
@@ -134,7 +133,7 @@ public class FriendsActivity extends Activity{
             	postsviewscreen.setVisibility(4);
             	friendslistscreen.setVisibility(0);
             	inlistview = true;
-            	//TODO
+
             	if(listadapter.isEmpty()) {
             		listadapter.clear();
             		Aurora.addTask(new PopulateFriendsList().execute());
@@ -147,8 +146,6 @@ public class FriendsActivity extends Activity{
 	        		friendspostsscreen.setVisibility(0);
 	        		friendslistscreen.setVisibility(4);
 	        		friendsadapter.populate(friendIds.get(position));
-
-	        		//TODO
 	        }
 	      });
 	    
@@ -164,7 +161,6 @@ public class FriendsActivity extends Activity{
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	        	ImageView clicked = (ImageView) v;
 	        	postimage.setImageDrawable(clicked.getDrawable());
-	        	//TODO
 	        	post.setText(friendsadapter.getStatusNote(position));
 	        	poster.setText(friendsadapter.getStatusUsername(position));
 	        	time.setText(friendsadapter.getStatusTime(position));
@@ -199,7 +195,6 @@ public class FriendsActivity extends Activity{
             }
         });
     	
-    	//TODO
     	sendcomment.setOnClickListener(new View.OnClickListener() {
     		public void onClick(View v) {
     			if(!comment.getText().toString().trim().equals("")) { //a valid comment
@@ -237,14 +232,18 @@ public class FriendsActivity extends Activity{
 	    recentMoodsAdapter.populate(0);
 	}
 	
-	//TODO
+	public static void noRecentPosts() {
+		//TODO show textview encouraging you to post a mood status
+		//be sure to hide the textview in myOnResume()
+		Toast.makeText(context, "no posts", Toast.LENGTH_SHORT).show();
+	}
+	
 	@Override
 	public void onPause() {
 		super.onPause();
 		Aurora.killTasks();
 	}
 	
-	//TODO
 	private class PopulateFriendsList extends AsyncTask<Void, Void, JSONArray> {
 		@Override
 		protected JSONArray doInBackground(Void... params) {
@@ -311,7 +310,6 @@ public class FriendsActivity extends Activity{
     	}
     }
 	
-	//TODO
 	private class PostStatusComment extends AsyncTask<Object, Void, String> {
 		@Override
 		protected String doInBackground(Object... params) {
